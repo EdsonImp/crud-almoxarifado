@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.effect.DisplacementMap?>
+<?import javafx.scene.effect.FloatMap?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox id="vbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+ minWidth="-Infinity" prefHeight="584.0" prefWidth="716.0" 
+ xmlns="http://javafx.com/javafx/17" 
+ xmlns:fx="http://javafx.com/fxml/1" fx:controller="almoxarifadoFXMLmvc.controler.ControlerTelaInicial">
+   <children>
+      <MenuBar opacity="0.82">
+        <menus>
+          <Menu mnemonicParsing="false" text="Início">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Cadastrar" />
+                  <MenuItem mnemonicParsing="false" text="Pesquisar" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Pesquisa">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Por ID" />
+                  <MenuItem mnemonicParsing="false" text="Todos" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Configuração">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Ajuda">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Sobre" />
+              </items>
+            </Menu>
+        </menus>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant>
+                     <color>
+                        <Color red="0.3876705765724182" green="0.8564814925193787" blue="0.9736841917037964" />
+                     </color>
+                  </Light.Distant>
+               </light>
+            </Lighting>
+         </effect>
+      </MenuBar>
+      <HBox opacity="0.99" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <ImageView id="cad"  fitHeight="62.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#cadastrar">
+               <image>
+                  <Image url="/icones/cadastrar.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="CLOSED_HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView id="consult" fitHeight="75.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#consultar" >
+               <image>
+                  <Image url="/icones/pesquisar.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="62.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="/icones/configurar.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="65.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="/icones/informacao.png" />
+               </image>
+            </ImageView>
+            <VBox prefHeight="100.0" prefWidth="474.0">
+               <children>
+                  <Label text=" Controle de Almoxarifado" textFill="#4797d0">
+                     <font>
+                        <Font name="Arial Black" size="33.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="19.0" prefWidth="463.0" text="Versão 1.0  Copyright 2022 by Edson Silva" textAlignment="CENTER" textFill="#6496e8" />
+               </children>
+            </VBox>
+         </children>
+         <effect>
+            <DisplacementMap>
+               <mapData>
+                  <FloatMap />
+               </mapData>
+            </DisplacementMap>
+         </effect>
+      </HBox>
+      <ImageView fitHeight="87.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</VBox>

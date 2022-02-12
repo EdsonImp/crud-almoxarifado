@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" 
+minWidth="-Infinity" prefHeight="677.0" prefWidth="984.0" xmlns="http://javafx.com/javafx/17" 
+xmlns:fx="http://javafx.com/fxml/1" fx:controller="almoxarifadoFXMLmvc.controler.ControlerConsultas">
+  <content>
+    <AnchorPane depthTest="DISABLE" minHeight="0.0" minWidth="0.0" prefHeight="611.0" prefWidth="773.0">
+         <children>
+            <TableView fx:id="tableViewPesquisa" layoutX="181.0" layoutY="5.0" prefHeight="664.0" prefWidth="789.0">
+              <columns>
+                <TableColumn fx:id="columnId" prefWidth="46.0" text="Id" />
+                <TableColumn fx:id="columnNome" prefWidth="282.0" text="Nome" />
+                  <TableColumn fx:id="columnQuantidade" prefWidth="108.0" text="Quantidade" />
+                  <TableColumn fx:id="columnLocal" prefWidth="224.0" text="Localização" />
+                  <TableColumn fx:id="columnEspecie" prefWidth="137.0" text="Espécie" />
+              </columns>
+            </TableView>
+            <VBox alignment="TOP_CENTER" depthTest="DISABLE" layoutX="9.0" layoutY="5.0" prefHeight="525.0" prefWidth="159.0" spacing="8.0">
+               <children>
+                  <Label prefHeight="18.0" prefWidth="158.0" text="Consulta de Produtos " textFill="#0a052f">
+                     <font>
+                        <Font name="Calibri" size="17.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="listaPorNome" mnemonicParsing="false" text="Lista por Nome" textFill="#4b4beb" onAction="#listaProdutoPorNome" >
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="txtNome" promptText="Digite o Nome" />
+                  <Button fx:id="listaPorId" mnemonicParsing="false" text="Lista por Id" textFill="#5a54d0" onAction="#listaProdutoPorId">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="txtId" prefHeight="25.0" prefWidth="123.0" promptText="Digite o Id" />
+                  <Button fx:id="listaPorEspecie" mnemonicParsing="false" text="Lista por Espécie" textFill="#455fd3">
+                     <font>
+                        <Font name="Calibri Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="txtEspecie" promptText="Digite a Espécie" />
+                  <Button fx:id="listaPorLocal" mnemonicParsing="false" text="Lista por Local" textFill="#5559e4">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="txtLocal" promptText="Digite o Local" />
+                  <Button fx:id="listaTodos" mnemonicParsing="false" text="Lista Todos" textFill="#5263e4" onAction="#listaTodosProdutos">
+                            <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="imprimir" mnemonicParsing="false" text="Imprimir" textFill="#4452db" onAction="#imprimiTabelaAtual" >
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="apagarLinha" mnemonicParsing="false" text="Apagar Selecionado" textFill="#d3332b">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="sair" mnemonicParsing="false" text="Sair" textFill="#5b5fe3">
+                     <font>
+                        <Font name="Calibri Bold" size="17.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+            </VBox>
+         </children></AnchorPane>
+  </content>
+</ScrollPane>

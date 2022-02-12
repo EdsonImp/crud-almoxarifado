@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" 
+minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+ prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" 
+ xmlns="http://javafx.com/javafx/17" 
+ xmlns:fx="http://javafx.com/fxml/1" fx:controller="almoxarifadoFXMLmvc.controler.ControleCadastro">
+  <tabs>
+    <Tab text="Cadastro de Produtos">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="23.0" layoutY="40.0" text="Produto">
+                     <font>
+                        <Font name="Calibri Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtProduto" layoutX="99.0" layoutY="37.0" prefHeight="28.0" prefWidth="311.0" promptText="Digite o novo Produto">
+                     <font>
+                        <Font name="Calibri" size="16.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="23.0" layoutY="90.0" text="Espécie">
+                     <font>
+                        <Font name="Calibri Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="boxEspecie" layoutX="99.0" layoutY="86.0" opacity="0.59" prefHeight="30.0" prefWidth="212.0" promptText="Selecione o tipo de Embalagem" visibleRowCount="13"  />
+                  <Label layoutX="23.0" layoutY="141.0" text="Quantidade">
+                     <font>
+                        <Font name="Calibri Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="quantidade" layoutX="125.0" layoutY="140.0" prefHeight="30.0" prefWidth="122.0" promptText="Digite a Quantidade" />
+                  <Label layoutX="25.0" layoutY="188.0" text="Localização">
+                     <font>
+                        <Font name="Calibri Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="boxLocal" layoutX="125.0" layoutY="187.0" opacity="0.49" prefHeight="31.0" prefWidth="186.0" promptText="Selecione a localizacão" />
+                  <Button fx:id="botaoGravar" layoutX="27.0" layoutY="237.0" mnemonicParsing="false" text="Gravar" onAction="#persistirProduto"/>
+                  <Button layoutX="89.0" layoutY="237.0" mnemonicParsing="false" text="Voltar" />
+               </children>
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.3999147117137909" green="0.604821503162384" blue="0.8552631735801697" />
+                     </color>
+                  </InnerShadow>
+               </effect></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Cadastro de Local">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="21.0" layoutY="29.0" text="Local" textFill="#759eda">
+                     <font>
+                        <Font name="Calibri Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtCadLocal" layoutX="78.0" layoutY="25.0" prefHeight="25.0" prefWidth="178.0" />
+                  <Label layoutX="262.0" layoutY="17.0" prefHeight="24.0" prefWidth="317.0" text="Cadastre um local do seu almoxarifado, tipo : prateleira," />
+                  <Label layoutX="262.0" layoutY="33.0" text="setor, armário, cofre, etc." />
+                  <Button layoutX="21.0" layoutY="63.0" mnemonicParsing="false" text="Gravar" textFill="#5161da" onAction="#persistirLocal"/>
+                  <TableView fx:id="tabelaLocal" layoutX="21.0" layoutY="96.0" prefHeight="261.0" prefWidth="542.0">
+                    <columns>
+                      <TableColumn fx:id= "colunaId" prefWidth="75.0" text="Id" />
+                        <TableColumn fx:id= "colunaNome" prefWidth="75.0" text="Local" />
+                    </columns>
+                  </TableView>
+               </children>
+               <effect>
+                  <InnerShadow />
+               </effect></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="Cadastro de Espécie">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="24.0" layoutY="26.0" text="Espécie" textFill="#597dc9">
+                     <font>
+                        <Font name="Calibri Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="26.0" layoutY="71.0" mnemonicParsing="false" text="Gravar" textFill="#4696e1" onAction="#persistirEspecie"/>
+                  <TextField fx:id="txtCadEspecie" layoutX="89.0" layoutY="23.0" prefHeight="25.0" prefWidth="187.0" promptText="Digite a especie de embalagem" />
+                  <Label layoutX="290.0" layoutY="18.0" text="Cadastre uma espécie de embalagem , tipo: caixa," />
+                  <Label layoutX="290.0" layoutY="40.0" text="unidade, tipo de vasilha." />
+                  <TableView fx:id="tabelaEspecie" layoutX="32.0" layoutY="106.0" prefHeight="254.0" prefWidth="515.0">
+                    <columns>
+                      <TableColumn fx:id="colunaEspecieId" prefWidth="75.0" text="Id" />
+                      <TableColumn fx:id="colunaEspecieNome" prefWidth="75.0" text="Espécie" />
+                    </columns>
+                  </TableView>
+               </children>
+               <effect>
+                  <InnerShadow />
+               </effect></AnchorPane>
+        </content>
+      </Tab>
+  </tabs>
+</TabPane>
