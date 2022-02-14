@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.swing.JOptionPane;
+
 import almoxarifadoFXMLmvc.model.dao.Dao;
 import almoxarifadoFXMLmvc.model.entidades.Produto;
 import javafx.collections.FXCollections;
@@ -25,10 +27,9 @@ import net.sf.jasperreports.view.JasperViewer;
 
 public class ControlerConsultas implements Initializable{
 	private List<Produto> listaPorNome;
-	private List<Produto> listaTodos;
-	private String listaPorId;
-	
-	private List<Produto> listaParaImprimir;
+	private List<Produto> listaTodos = new ArrayList<>();
+	private List<Produto> listaPorId = new ArrayList<>();
+	private List<Produto> listaParaImprimir = new ArrayList<>();
 	
 	@FXML
 	private TextField txtId;
@@ -53,13 +54,13 @@ public class ControlerConsultas implements Initializable{
 		
 	} //tentativa de preencher lista geral
 	public void listaTodosProdutos() {
-		listaPorNome = new ArrayList<>();
+		listaPorNome = new ArrayList<Produto>();
+		listaPorId = new ArrayList<Produto>();
 		Dao<Produto> dao = new Dao<>(Produto.class);
-		//dao.abrirT();
-		listaTodos = dao.obterPorNome("");
-		//for(Produto e: dao.obterTodos()) {
-		//	getListaTodos().add(e);
-		//}
+		dao.abrirT();
+		for(Produto e: dao.obterTodos()) {
+		 getListaTodos().add(e);
+		}
 		dao.fecharT();
 		dao.fechar();
 		columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -68,30 +69,47 @@ public class ControlerConsultas implements Initializable{
 		columnLocal.setCellValueFactory(new PropertyValueFactory<>("local"));
 		columnEspecie.setCellValueFactory(new PropertyValueFactory<>("especie"));
 	
-		tableViewPesquisa.setItems(FXCollections.observableArrayList(listaTodos));
+		tableViewPesquisa.setItems(FXCollections.observableArrayList(getListaTodos()));
 	
 	}
 	
-	
+	//tentativa de corririr bug id nao digitado e id nao match
 	public void listaProdutoPorId() {
+		listaTodos = new ArrayList<Produto>();
+		listaPorNome = new ArrayList<Produto>();
+		listaPorId = new ArrayList<Produto>();
 		String idConsulta = txtId.getText();
+		
+		if(idConsulta.isEmpty()) {
+			JOptionPane.showMessageDialog(null,"Preencha o campo id!");
+		}
+		else {
 		int id = Integer.parseInt(idConsulta);
 		Dao<Produto> dao = new Dao<>(Produto.class);
 		dao.abrirT();
-		Produto produto = dao.obterPorId(id);
+		listaPorId.add(dao.obterPorId(id));
+			
 		columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		columnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
 		columnQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
 		columnLocal.setCellValueFactory(new PropertyValueFactory<>("local"));
 		columnEspecie.setCellValueFactory(new PropertyValueFactory<>("especie"));
 		
-		tableViewPesquisa.setItems(FXCollections.observableArrayList(produto));
+		tableViewPesquisa.setItems(FXCollections.observableArrayList(listaPorId));
+		
+		}
+		if(columnId.getCellData(0) ==  null && !idConsulta.isEmpty()) {JOptionPane.showMessageDialog(null,"Id Não Cadastrado!");}
 		
 		
-	}
+}
+			
+	
 	public void listaProdutoPorNome() {
 		listaTodos = new ArrayList<Produto>();
+		listaPorId = new ArrayList<Produto>();
 		String nomeConsulta = txtNome.getText();
+		if(nomeConsulta.isEmpty()) {JOptionPane.showMessageDialog(null,"Preencha o Campo Nome!");}
+		else {
 		Dao<Produto> daoNome = new Dao<>(Produto.class);
 		listaPorNome = daoNome.obterPorNome(nomeConsulta);
 		//for (Produto produto : listaPorNome) {
@@ -102,20 +120,25 @@ public class ControlerConsultas implements Initializable{
 			columnEspecie.setCellValueFactory(new PropertyValueFactory<>("especie"));
 			
 			tableViewPesquisa.setItems(FXCollections.observableArrayList(listaPorNome));
-			
-					
-		}
+		 } 	
+			if(columnNome.getCellData(0) ==  null && !nomeConsulta.isEmpty()) {JOptionPane.showMessageDialog(null,"Produto Não Cadastrado!");}	
+	}
 		
 	
 	
-	
+	//button imprimir 
 	public void imprimiTabelaAtual() {
-		if (listaPorNome.get(0).getNome() != null) {
-			listaParaImprimir = listaPorNome;}
-		 if(listaTodos.get(0).getNome() != null) {
-			listaParaImprimir = listaTodos;
+		if(!listaPorId.isEmpty()) {
+		listaParaImprimir = listaPorId;
 		}
-		else {System.out.println("nada a ser impresso");}
+		if(! listaTodos.isEmpty()) {
+		listaParaImprimir = listaTodos;
+		}
+		else if (!listaPorNome.isEmpty()) {
+		listaParaImprimir = listaPorNome;	
+		}
+		
+		
 		try {
 			JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile("C:\\icones\\relatorioAlmoxarifado.jasper");
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null,new JRBeanCollectionDataSource(listaParaImprimir));
@@ -135,10 +158,7 @@ public class ControlerConsultas implements Initializable{
 	public void setListaTodos(List<Produto> listaTodosProdutos) {
 		this.listaTodos = listaTodosProdutos;
 	}
-	public void setListaPorId(String listaPorId) {
-		this.listaPorId = listaPorId;
-}
-	public String getListaPorId() {
-		return listaPorId;
-	}
+	
+	
+	
 	}

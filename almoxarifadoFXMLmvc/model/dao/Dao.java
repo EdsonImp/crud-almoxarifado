@@ -49,25 +49,29 @@ public class Dao<E> {
 		em.persist(entidade);
 		return this;
 	}
-	//Metodo que ja faz tudo acima, aproveitando os metodos criados
+	
 	public Dao<E> incluirAtomico(E entidade){
 		return this.abrirT().incluir(entidade).fecharT();
 	
 	}
 	
+	
+	
 	public E obterPorId( Object id) {
-		return em.find(classe, id);
+			return em.find(classe, id);
 		
 	}
 	public List<Produto> obterPorNome(String nome){
 		String nomeConsulta = nome;
+		if(!nome.isEmpty()) { 
 		em.getTransaction().begin();
 		String jpql = ("select c from Produto c where c.nome like :pnome");
 		Query query = em.createQuery(jpql);
 		query.setParameter("pnome", "%" + nomeConsulta + "%");
 		@SuppressWarnings("unchecked")
 		List<Produto> produtos = query.getResultList();
-		return produtos;
+		return produtos;}
+		else {return null;}
 	}
 	//public List<E> obterTodos(){
 	//	return this.obterTodos(10,0);
