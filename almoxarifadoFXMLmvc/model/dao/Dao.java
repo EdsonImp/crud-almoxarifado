@@ -73,6 +73,43 @@ public class Dao<E> {
 		return produtos;}
 		else {return null;}
 	}
+	
+	public void removerProduto(int id) {
+		int idARemover = id;
+		Produto prodARemover = em.find(Produto.class, idARemover);
+		if (prodARemover != null) {
+		em.getTransaction().begin();
+		em.remove(prodARemover);
+		em.getTransaction().commit();
+		em.close();}
+		
+	}
+	
+	public List<Produto> obterPorEspecie(String especie){
+		String especieConsulta = especie;
+		if(!especie.isEmpty()) { 
+		em.getTransaction().begin();
+		String jpql = ("select c from Produto c where c.especie like :pespecie");
+		Query query = em.createQuery(jpql);
+		query.setParameter("pespecie", "%" + especieConsulta + "%");
+		@SuppressWarnings("unchecked")
+		List<Produto> produtos = query.getResultList();
+		return produtos;}
+		else {return null;}
+	}
+	
+	public List<Produto> obterPorLocal(String local){
+		String localConsulta = local;
+		if(!local.isEmpty()) { 
+		em.getTransaction().begin();
+		String jpql = ("select c from Produto c where c.local like :plocal");
+		Query query = em.createQuery(jpql);
+		query.setParameter("plocal", "%" + localConsulta + "%");
+		@SuppressWarnings("unchecked")
+		List<Produto> produtos = query.getResultList();
+		return produtos;}
+		else {return null;}
+	}
 	//public List<E> obterTodos(){
 	//	return this.obterTodos(10,0);
 	//}

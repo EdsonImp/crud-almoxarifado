@@ -33,41 +33,41 @@ xmlns:fx="http://javafx.com/fxml/1" fx:controller="almoxarifadoFXMLmvc.controler
                         <Font name="Calibri" size="17.0" />
                      </font>
                   </Label>
-                  <Button fx:id="listaPorNome" mnemonicParsing="false" text="Lista por Nome" textFill="#4b4beb" onAction="#listaProdutoPorNome" >
+                  <Button mnemonicParsing="false" text="Lista por Nome" textFill="#4b4beb" onAction="#listaProdutoPorNome" >
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
                   <TextField fx:id="txtNome" promptText="Digite o Nome" />
-                  <Button fx:id="listaPorId" mnemonicParsing="false" text="Lista por Id" textFill="#5a54d0" onAction="#listaProdutoPorId">
+                  <Button mnemonicParsing="false" text="Lista por Id" textFill="#4b4beb" onAction="#listaProdutoPorId">
                      <font>
                         <Font name="Calibri Bold" size="13.0" />
                      </font>
                   </Button>
                   <TextField fx:id="txtId" prefHeight="25.0" prefWidth="123.0" promptText="Digite o Id" />
-                  <Button fx:id="listaPorEspecie" mnemonicParsing="false" text="Lista por Espécie" textFill="#455fd3">
+                  <Button  mnemonicParsing="false" text="Lista por Espécie" textFill="#4b4beb" onAction="#listaProdutosPorEspecie">
                      <font>
                         <Font name="Calibri Bold" size="12.0" />
                      </font>
                   </Button>
                   <TextField fx:id="txtEspecie" promptText="Digite a Espécie" />
-                  <Button fx:id="listaPorLocal" mnemonicParsing="false" text="Lista por Local" textFill="#5559e4">
+                  <Button  mnemonicParsing="false" text="Lista por Local" textFill="#4b4beb" onAction="#listaProdutosPorLocal">
                      <font>
                         <Font name="Calibri Bold" size="13.0" />
                      </font>
                   </Button>
                   <TextField fx:id="txtLocal" promptText="Digite o Local" />
-                  <Button fx:id="listaTodos" mnemonicParsing="false" text="Lista Todos" textFill="#5263e4" onAction="#listaTodosProdutos">
+                  <Button mnemonicParsing="false" text="Lista Todos" textFill="#4b4beb" onAction="#listaTodosProdutos">
                             <font>
                         <Font name="Calibri Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="imprimir" mnemonicParsing="false" text="Imprimir" textFill="#4452db" onAction="#imprimiTabelaAtual" >
+                  <Button mnemonicParsing="false" text="Imprimir" textFill="#4b4beb" onAction="#imprimiTabelaAtual" >
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="apagarLinha" mnemonicParsing="false" text="Apagar Selecionado" textFill="#d3332b">
+                  <Button fx:id="apagarLinha" mnemonicParsing="false" text="Apagar Selecionado" textFill="#d3332b"  onAction="#removerLinhaMarcada">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>

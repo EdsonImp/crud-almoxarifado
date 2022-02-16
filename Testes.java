@@ -2,6 +2,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import almoxarifadoFXMLmvc.model.dao.Dao;
 //import almoxarifadoFXMLmvc.controler.ControlerConsultas;
 import almoxarifadoFXMLmvc.model.entidades.Produto;
 import net.sf.jasperreports.engine.JRException;
@@ -14,8 +15,11 @@ import net.sf.jasperreports.view.JasperViewer;
 
 public class Testes {
 	public static void main(String[] args) {
-		Testes teste = new Testes();
-		teste.imprimiRelatorio();
+		Dao<Produto> dao = new Dao<>();
+		dao.removerProduto(7);
+		
+		//Testes teste = new Testes();
+		//teste.imprimiRelatorio();
 
 	//Dao<Produto> dao = new Dao<>(Produto.class);
 	//Produto prod1 = new Produto("Borracha", "Caixa", 10, "Prateleira");
