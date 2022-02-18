@@ -16,6 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -43,7 +44,7 @@ public class ControleCadastro implements Initializable{
 	@FXML
 	private TextField txtCadEspecie;
 	@FXML
-	private TextField quantidade;
+	private TextField txtQuantidade;
 	@FXML
 	private TextField txtProduto;
 	@FXML
@@ -94,28 +95,51 @@ public ControleCadastro() {
 		boxLocal.setItems(obsListLocal);
 		
 	}
-
+     //Inicio método para persistir produtos
 	public void persistirProduto() {
 		String produto = txtProduto.getText();
+	if(produto == null) {mensagemProdutoRepetido();}
+		else {
 		Especie espe = boxEspecie.getValue();
+	if(espe == null) {mensagemProdutoRepetido();}
+		else {
 		String especie = espe.getNome();
-		int quantdd = Integer.parseInt(quantidade.getText());
 		Local local = boxLocal.getValue();
+	if(local == null) {mensagemProdutoRepetido();}
+		else {
 		String localizacao =local.getNome();
+		String tipoQtdd = txtQuantidade.getText();
+	if(tipoQtdd.isEmpty()) {mensagemProdutoRepetido();}
+		else {
+		Boolean valida = validaQuantidade(tipoQtdd);
+	if (valida == false) {mensagemErro();}
+		else {
+		int quantdd = Integer.parseInt(txtQuantidade.getText());
 		Produto prod = new Produto(produto, especie, quantdd, localizacao);
 		Dao<Produto> daoproduto = new Dao<>();
 		try {
-			
 			daoproduto.abrirT();
 			daoproduto.incluir(prod);
 			
 		} catch (Exception e){
-			JOptionPane.showMessageDialog(null,"Produto Repetido!");
-			
+			mensagemProdutoRepetido();
 		}
 		daoproduto.fecharT();
-	}
+		//mensagem de produto cadasatrado
+		Alert produtoCadastrado = new Alert(Alert.AlertType.INFORMATION);
+		produtoCadastrado.setTitle("Mensagem do Sistema");
+		produtoCadastrado.setHeaderText("Cadastro de Produtos");
+		produtoCadastrado.setContentText("Produto ("+produto+") Cadastrado");
+		produtoCadastrado.showAndWait();
 		
+		
+		txtProduto.setText(""); //limpar fild produto
+		txtQuantidade.setText("");
+	}}}
+	}
+	}
+	} // Fim método persistir produto
+	
 	public void persistirEspecie() {
 		String nome = txtCadEspecie.getText();
 		Especie especie = new Especie(nome);
@@ -135,9 +159,7 @@ public ControleCadastro() {
 		cadlocal.fechar();
 		
 	}
-	//tentativa de criar tabela local e mostrar
 	public void geraTabelaDeLocal() {
-		
 		List<Local> locais = new ArrayList<>();
 		Dao<Local> daoLocal = new Dao<>(Local.class);
 		daoLocal.abrirT();
@@ -165,6 +187,28 @@ public void gerarTabelaDeEspecie() {
 	tabelaEspecie.setItems(FXCollections.observableArrayList(especies));
 }
 
+	public  boolean validaQuantidade(String qtdd){
+		boolean valido = true;
+		if(!qtdd.matches("[0-9]*")){
+			valido = false;
+		} return valido;
+	}
+		
+
+	public void mensagemErro() {
+	Alert dialogoInfo = new Alert(Alert.AlertType.INFORMATION);
+    dialogoInfo.setTitle("Mensagem do Sistema");
+    dialogoInfo.setHeaderText("Observe em Qantidade");
+    dialogoInfo.setContentText("Por favor, digite um valor válido, ex 1, 2, 10, 20!");
+    dialogoInfo.showAndWait();
+}
+	public void mensagemProdutoRepetido() {
+		Alert dialogoInfo = new Alert(Alert.AlertType.INFORMATION);
+	    dialogoInfo.setTitle("Mensagem do Sistema");
+	    dialogoInfo.setHeaderText("Por favor preencha todos os campos");
+	    dialogoInfo.setContentText("Produto não digitado ou ja Cadastrado");
+	    dialogoInfo.showAndWait();
+	   	}
 
 public ComboBox<Especie> getBoxEspecie() {
 	return boxEspecie;
@@ -185,10 +229,10 @@ public void setTxtProduto(TextField txtProduto) {
 	this.txtProduto = txtProduto;
 }
 public TextField getQuantidade() {
-	return quantidade;
+	return txtQuantidade;
 }
 public void setQuantidade(TextField quantidade) {
-	this.quantidade = quantidade;
+	this.txtQuantidade = quantidade;
 }
 public TextField getTxtCadLocal() {
 	return txtCadLocal;

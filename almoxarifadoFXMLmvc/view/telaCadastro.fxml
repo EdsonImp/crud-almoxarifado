@@ -44,7 +44,7 @@ minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
                         <Font name="Calibri Bold" size="19.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="quantidade" layoutX="125.0" layoutY="140.0" prefHeight="30.0" prefWidth="122.0" promptText="Digite a Quantidade" />
+                  <TextField fx:id="txtQuantidade" layoutX="125.0" layoutY="140.0" prefHeight="30.0" prefWidth="122.0" promptText="Digite a Quantidade" />
                   <Label layoutX="25.0" layoutY="188.0" text="Localização">
                      <font>
                         <Font name="Calibri Bold" size="19.0" />

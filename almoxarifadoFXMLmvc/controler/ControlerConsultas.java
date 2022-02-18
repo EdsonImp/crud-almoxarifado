@@ -192,7 +192,7 @@ public class ControlerConsultas implements Initializable{
 		
 		
 		try {
-			JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile("C:\\icones\\relatorioAlmoxarifado.jasper");
+			JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile("C:\\Users\\Edson Sousa\\eclipse-workspace\\almoxarifado\\src\\main\\java\\relatorios\\relatorioAlmoxarifado.jasper");
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null,new JRBeanCollectionDataSource(listaParaImprimir));
 
 			JasperViewer jasperView = new JasperViewer(jasperPrint,false);
