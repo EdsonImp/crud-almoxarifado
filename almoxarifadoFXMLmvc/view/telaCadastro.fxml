@@ -82,6 +82,11 @@ minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
                         <TableColumn fx:id= "colunaNome" prefWidth="75.0" text="Local" />
                     </columns>
                   </TableView>
+                  <Button fx:id="botaoApagar" layoutX="89.0" layoutY="63.0" mnemonicParsing="false" text="Apagar Selecionado" textFill="#d71111" onAction="#removerLinhaMarcadaTabelaLocal">
+                     <font>
+                        <Font name="Calibri" size="13.0" />
+                     </font>
+                  </Button>
                </children>
                <effect>
                   <InnerShadow />
@@ -107,6 +112,11 @@ minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
                       <TableColumn fx:id="colunaEspecieNome" prefWidth="75.0" text="Espécie" />
                     </columns>
                   </TableView>
+                   <Button  layoutX="101.0" layoutY="71.0" mnemonicParsing="false" text="Apagar Selecionado" textFill="#cd1b1b" onAction="#removerLinhaMarcadaTabelaEspecie">
+                     <font>
+                        <Font name="Calibri" size="13.0" />
+                     </font>
+                  </Button>
                </children>
                <effect>
                   <InnerShadow />

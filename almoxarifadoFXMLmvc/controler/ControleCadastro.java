@@ -27,11 +27,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ControleCadastro implements Initializable{
 	@FXML
-	TableView<Especie> tabelaEspecie;
+	private TableView<Especie> tabelaEspecie;
 	@FXML
-	TableColumn colunaEspecieId;
+	private TableColumn colunaEspecieId;
 	@FXML
-	TableColumn colunaEspecieNome;
+	private TableColumn colunaEspecieNome;
 	
 	@FXML
 	TableView<Local> tabelaLocal;
@@ -140,25 +140,49 @@ public ControleCadastro() {
 	}
 	} // Fim método persistir produto
 	
+	
+	//Inicio método persistir Especie
 	public void persistirEspecie() {
+		
 		String nome = txtCadEspecie.getText();
+		if(nome.isEmpty()) {mensagemProdutoRepetido();}
+		else {
 		Especie especie = new Especie(nome);
 		Dao<Especie> cadEspecie = new Dao<>(Especie.class);
+		try {
 		cadEspecie.abrirT();
 		cadEspecie.incluir(especie);
+		} catch (Exception e) {
+			mensagemProdutoRepetido();
+		}
 		cadEspecie.fecharT();
 		cadEspecie.fechar();
-	}
+			}
+		gerarTabelaDeEspecie();
+		txtCadEspecie.setText("");
+		} //Fim do método persistir espécie
+	
+	
 	public void persistirLocal() {
 		String nome = txtCadLocal.getText();
+		if(nome.isEmpty()) {mensagemProdutoRepetido();}
+		else {
 		Local local = new Local(nome);
 		Dao<Local> cadlocal = new Dao<>(Local.class);
+		try {
 		cadlocal.abrirT();
 		cadlocal.incluir(local);
+		
+		} catch (Exception e) {
+			mensagemProdutoRepetido();
+		}
 		cadlocal.fecharT();
 		cadlocal.fechar();
-		
+		}
+		geraTabelaDeLocal();
+		txtCadLocal.setText("");
 	}
+	
 	public void geraTabelaDeLocal() {
 		List<Local> locais = new ArrayList<>();
 		Dao<Local> daoLocal = new Dao<>(Local.class);
@@ -193,7 +217,28 @@ public void gerarTabelaDeEspecie() {
 			valido = false;
 		} return valido;
 	}
+	
+	//Inicio metodo para remover especie marcada
+	public void removerLinhaMarcadaTabelaEspecie() {
+		if (tabelaEspecie.getSelectionModel().getSelectedItem() !=null) {
+		Especie especie = tabelaEspecie.getSelectionModel().getSelectedItem();
+		int id = especie.getId();
+		Dao<Especie> daoDelete = new Dao<>(Especie.class);
+		daoDelete.removerEspecie(id);
+		gerarTabelaDeEspecie();
+		}
 		
+	}
+	public void removerLinhaMarcadaTabelaLocal() {
+		if (tabelaLocal.getSelectionModel().getSelectedItem() !=null) {
+		Local local = tabelaLocal.getSelectionModel().getSelectedItem();
+		int id = local.getId();
+		Dao<Local> daoDelete = new Dao<>(Local.class);
+		daoDelete.removerLocal(id);
+		}
+		geraTabelaDeLocal();
+		
+	}
 
 	public void mensagemErro() {
 	Alert dialogoInfo = new Alert(Alert.AlertType.INFORMATION);

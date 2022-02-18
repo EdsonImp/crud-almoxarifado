@@ -67,7 +67,7 @@ xmlns:fx="http://javafx.com/fxml/1" fx:controller="almoxarifadoFXMLmvc.controler
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="apagarLinha" mnemonicParsing="false" text="Apagar Selecionado" textFill="#d3332b"  onAction="#removerLinhaMarcada">
+                  <Button mnemonicParsing="false" text="Apagar Selecionado" textFill="#d3332b"  onAction="#removerLinhaMarcada">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>

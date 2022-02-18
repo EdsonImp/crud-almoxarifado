@@ -8,6 +8,8 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import almoxarifadoFXMLmvc.model.entidades.Especie;
+import almoxarifadoFXMLmvc.model.entidades.Local;
 import almoxarifadoFXMLmvc.model.entidades.Produto;
 
 
@@ -83,6 +85,25 @@ public class Dao<E> {
 		em.getTransaction().commit();
 		em.close();}
 		
+	}
+	public void removerEspecie(int id) {
+		int idARemover = id;
+		Especie especieARemover = em.find(Especie.class, idARemover);
+		if (especieARemover != null) {
+		em.getTransaction().begin();
+		em.remove(especieARemover);
+		em.getTransaction().commit();
+		em.close();}
+	}
+	
+	public void removerLocal(int id) {
+		int idARemover = id;
+		Local localARemover = em.find(Local.class, idARemover);
+		if (localARemover != null) {
+		em.getTransaction().begin();
+		em.remove(localARemover);
+		em.getTransaction().commit();
+		em.close();}
 	}
 	
 	public List<Produto> obterPorEspecie(String especie){
